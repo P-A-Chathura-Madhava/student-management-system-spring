@@ -46,4 +46,13 @@ public class StudentService {
         return modelMapper.map(studentList,new TypeToken<ArrayList<StudentDTO>>(){
         }.getType());
     }
+
+    public String deleteStudent(int id){
+        if (studentRepo.existsById(id)){
+            studentRepo.deleteById(id);
+            return VarList.RSP_SUCCESS;
+        }else {
+            return VarList.RSP_NO_DATA_FOUND;
+        }
+    }
 }

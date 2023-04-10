@@ -27,4 +27,14 @@ public class StudentService {
             return VarList.RSP_SUCCESS;
         }
     }
+
+    public String updateStudent(StudentDTO studentDTO){
+        if (studentRepo.existsById(studentDTO.getId())){
+            studentRepo.save(modelMapper.map(studentDTO, Student.class));
+            return VarList.RSP_SUCCESS;
+
+        }else {
+            return VarList.RSP_NO_DATA_FOUND;
+        }
+    }
 }

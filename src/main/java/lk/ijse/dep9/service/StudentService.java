@@ -1,4 +1,30 @@
 package lk.ijse.dep9.service;
 
+import lk.ijse.dep9.dto.StudentDTO;
+import lk.ijse.dep9.entity.Student;
+import lk.ijse.dep9.repo.StudentRepo;
+import lk.ijse.dep9.util.VarList;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+
+@Service
+@Transactional
 public class StudentService {
+    @Autowired
+    private StudentRepo studentRepo;
+
+    @Autowired
+    private ModelMapper modelMapper;
+
+    public String saveStudent(StudentDTO studentDTO){
+        if (studentRepo.existsById(studentDTO.getId())){
+            return VarList.RSP_DUPLICATED;
+        }else {
+            studentRepo.save(modelMapper.map(studentDTO, Student.class));
+            return VarList.RSP_SUCCESS;
+        }
+    }
 }

@@ -21,7 +21,7 @@ public class StudentController {
     private ResponseDTO responseDTO;
 
     @PostMapping(value = "/saveStudent")
-    public ResponseEntity saveEmployee(@RequestBody StudentDTO studentDTO){
+    public ResponseEntity saveStudent(@RequestBody StudentDTO studentDTO){
         try {
             String res=studentService.saveStudent(studentDTO);
             if (res.equals("00")){
@@ -49,7 +49,7 @@ public class StudentController {
     }
 
     @PutMapping(value = "/updateStudent")
-    public ResponseEntity updateEmployee(@RequestBody StudentDTO studentDTO){
+    public ResponseEntity updateStudent(@RequestBody StudentDTO studentDTO){
         try {
             String res=studentService.updateStudent(studentDTO);
             if (res.equals("00")){
@@ -75,9 +75,7 @@ public class StudentController {
             responseDTO.setMessage(ex.getMessage());
             responseDTO.setContent(null);
             return new ResponseEntity(responseDTO, HttpStatus.INTERNAL_SERVER_ERROR);
-
         }
-
     }
 
     @GetMapping("/getAllStudents")
@@ -94,7 +92,6 @@ public class StudentController {
             responseDTO.setMessage(ex.getMessage());
             responseDTO.setContent(null);
             return new ResponseEntity(responseDTO, HttpStatus.INTERNAL_SERVER_ERROR);
-
         }
     }
 
